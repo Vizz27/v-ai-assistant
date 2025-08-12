@@ -52,9 +52,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// AI Assistant specific colors
-				'ai-glow': 'hsl(var(--ai-glow))',
-				'ai-secondary-glow': 'hsl(var(--ai-secondary-glow))',
+				// JARVIS Iron Man specific colors
+				'jarvis-gold': 'hsl(var(--jarvis-gold))',
+				'jarvis-red': 'hsl(var(--jarvis-red))',
+				'jarvis-dark-red': 'hsl(var(--jarvis-dark-red))',
 				'chat-user': 'hsl(var(--chat-user))',
 				'chat-assistant': 'hsl(var(--chat-assistant))',
 				sidebar: {
@@ -74,7 +75,7 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			backgroundImage: {
-				'gradient-ai': 'var(--gradient-ai)',
+				'gradient-jarvis': 'var(--gradient-jarvis)',
 				'gradient-glow': 'var(--gradient-glow)',
 				'gradient-subtle': 'var(--gradient-subtle)',
 			},

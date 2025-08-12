@@ -36,12 +36,12 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+              <div className="h-10 w-10 rounded-lg bg-gradient-jarvis flex items-center justify-center shadow-glow-primary">
                 <Brain className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold">OnHand AI Assistant</h1>
-                <p className="text-sm text-muted-foreground">Your personal AI companion</p>
+                <h1 className="text-xl font-semibold">JARVIS Assistant</h1>
+                <p className="text-sm text-muted-foreground">Just A Rather Very Intelligent System</p>
               </div>
             </div>
             
@@ -84,13 +84,13 @@ const Index = () => {
               {messages.length === 0 ? (
                 <div className="h-full flex items-center justify-center p-8">
                   <div className="text-center space-y-4 max-w-md">
-                    <div className="h-16 w-16 mx-auto rounded-full bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+                    <div className="h-16 w-16 mx-auto rounded-full bg-gradient-jarvis flex items-center justify-center shadow-glow-primary">
                       <Brain className="h-8 w-8 text-primary-foreground" />
                     </div>
-                    <h2 className="text-2xl font-semibold">Hello! I'm your AI Assistant</h2>
+                    <h2 className="text-2xl font-semibold">Hello! I'm JARVIS</h2>
                     <p className="text-muted-foreground">
-                      I can help you with various tasks like answering questions, doing calculations, 
-                      checking the time, and more. What would you like to do today?
+                      Just A Rather Very Intelligent System. I can help you with various tasks like answering questions, 
+                      doing calculations, checking the time, and more. How may I assist you today, sir?
                     </p>
                   </div>
                 </div>
@@ -108,15 +108,15 @@ const Index = () => {
                     
                     {isLoading && (
                       <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
-                        <div className="h-8 w-8 rounded-full bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+                        <div className="h-8 w-8 rounded-full bg-gradient-jarvis flex items-center justify-center shadow-glow-primary">
                           <Brain className="h-4 w-4 text-primary-foreground" />
                         </div>
                         <div className="flex-1">
-                          <div className="text-sm text-muted-foreground mb-2">AI Assistant</div>
+                          <div className="text-sm text-muted-foreground mb-2">JARVIS</div>
                           <div className="flex gap-1">
-                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse"></div>
-                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse delay-75"></div>
-                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse delay-150"></div>
+                            <div className="h-2 w-2 bg-jarvis-gold rounded-full animate-pulse"></div>
+                            <div className="h-2 w-2 bg-jarvis-red rounded-full animate-pulse delay-75"></div>
+                            <div className="h-2 w-2 bg-jarvis-gold rounded-full animate-pulse delay-150"></div>
                           </div>
                         </div>
                       </div>

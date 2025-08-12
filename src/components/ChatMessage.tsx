@@ -24,7 +24,7 @@ export const ChatMessage = ({ message, isUser, timestamp }: ChatMessageProps) =>
           "text-sm font-medium",
           isUser 
             ? "bg-secondary text-secondary-foreground" 
-            : "bg-gradient-ai text-primary-foreground"
+            : "bg-gradient-jarvis text-primary-foreground shadow-glow-primary"
         )}>
           {isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
         </AvatarFallback>
@@ -35,7 +35,7 @@ export const ChatMessage = ({ message, isUser, timestamp }: ChatMessageProps) =>
         isUser && "text-right"
       )}>
         <div className="text-sm text-muted-foreground">
-          {isUser ? "You" : "AI Assistant"}
+          {isUser ? "You" : "JARVIS"}
           {timestamp && (
             <span className="ml-2 text-xs opacity-60">
               {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

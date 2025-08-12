@@ -44,7 +44,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
           className={cn(
             "min-h-[60px] max-h-[200px] pr-24 resize-none",
             "border-border/50 bg-card/50 backdrop-blur-sm",
-            "focus:ring-ai-glow focus:border-ai-glow",
+            "focus:ring-jarvis-gold focus:border-jarvis-gold",
             "transition-all duration-300"
           )}
           disabled={isLoading}
@@ -60,7 +60,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
               "h-8 w-8 p-0 transition-all duration-300",
               isListening 
                 ? "text-destructive hover:text-destructive/80" 
-                : "text-muted-foreground hover:text-ai-glow"
+                : "text-muted-foreground hover:text-jarvis-gold"
             )}
           >
             {isListening ? (
@@ -75,7 +75,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
             size="sm"
             disabled={!message.trim() || isLoading}
             className={cn(
-              "h-8 w-8 p-0 bg-gradient-ai hover:shadow-glow-primary",
+              "h-8 w-8 p-0 bg-gradient-jarvis hover:shadow-glow-primary",
               "transition-all duration-300 disabled:opacity-50"
             )}
           >
