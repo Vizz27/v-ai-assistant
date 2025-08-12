@@ -1,11 +1,136 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card } from "@/components/ui/card";
+import { ChatMessage } from "@/components/ChatMessage";
+import { ChatInput } from "@/components/ChatInput";
+import { CommandSuggestions } from "@/components/CommandSuggestions";
+import { AIStatus } from "@/components/AIStatus";
+import { useAIChat } from "@/hooks/useAIChat";
+import { Brain, Trash2, Settings } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
+  const { messages, isLoading, sendMessage, clearMessages } = useAIChat();
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      const scrollArea = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      if (scrollArea) {
+        scrollArea.scrollTop = scrollArea.scrollHeight;
+      }
+    }
+  }, [messages]);
+
+  const handleClearChat = () => {
+    clearMessages();
+    toast.success("Chat history cleared");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-subtle text-foreground">
+      {/* Header */}
+      <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+                <Brain className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-xl font-semibold">OnHand AI Assistant</h1>
+                <p className="text-sm text-muted-foreground">Your personal AI companion</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleClearChat}
+                disabled={messages.length === 0}
+                className="hover:bg-secondary/50"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                Clear
+              </Button>
+              <Button variant="ghost" size="sm" className="hover:bg-secondary/50">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-6 max-w-4xl">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-120px)]">
+          {/* Sidebar */}
+          <div className="lg:col-span-1 space-y-4">
+            <AIStatus isProcessing={isLoading} />
+            
+            {messages.length === 0 && (
+              <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
+                <CommandSuggestions onSelectCommand={sendMessage} />
+              </Card>
+            )}
+          </div>
+
+          {/* Main Chat Area */}
+          <div className="lg:col-span-3 flex flex-col">
+            <Card className="flex-1 bg-card/30 backdrop-blur-sm border-border/50 overflow-hidden">
+              {messages.length === 0 ? (
+                <div className="h-full flex items-center justify-center p-8">
+                  <div className="text-center space-y-4 max-w-md">
+                    <div className="h-16 w-16 mx-auto rounded-full bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+                      <Brain className="h-8 w-8 text-primary-foreground" />
+                    </div>
+                    <h2 className="text-2xl font-semibold">Hello! I'm your AI Assistant</h2>
+                    <p className="text-muted-foreground">
+                      I can help you with various tasks like answering questions, doing calculations, 
+                      checking the time, and more. What would you like to do today?
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <ScrollArea ref={scrollAreaRef} className="h-full p-4">
+                  <div className="space-y-4">
+                    {messages.map((message) => (
+                      <ChatMessage
+                        key={message.id}
+                        message={message.message}
+                        isUser={message.isUser}
+                        timestamp={message.timestamp}
+                      />
+                    ))}
+                    
+                    {isLoading && (
+                      <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
+                        <div className="h-8 w-8 rounded-full bg-gradient-ai flex items-center justify-center shadow-glow-primary">
+                          <Brain className="h-4 w-4 text-primary-foreground" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-sm text-muted-foreground mb-2">AI Assistant</div>
+                          <div className="flex gap-1">
+                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse"></div>
+                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse delay-75"></div>
+                            <div className="h-2 w-2 bg-ai-glow rounded-full animate-pulse delay-150"></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </ScrollArea>
+              )}
+            </Card>
+            
+            <div className="mt-4">
+              <ChatInput onSendMessage={sendMessage} isLoading={isLoading} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
