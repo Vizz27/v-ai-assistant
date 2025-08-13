@@ -17,7 +17,7 @@ export const AIStatus = ({
     <div className="flex items-center gap-3 p-3 rounded-lg bg-card/30 backdrop-blur-sm border border-border/50">
       <div className="flex items-center gap-2">
         {isOnline ? (
-          <Wifi className="h-4 w-4 text-jarvis-gold" />
+          <Wifi className="h-4 w-4 text-calc-primary" />
         ) : (
           <WifiOff className="h-4 w-4 text-muted-foreground" />
         )}
@@ -32,7 +32,7 @@ export const AIStatus = ({
         <Zap className={cn(
           "h-4 w-4 transition-all duration-300",
           isProcessing 
-            ? "text-jarvis-red animate-pulse" 
+            ? "text-calc-glow animate-pulse" 
             : "text-muted-foreground"
         )} />
         <span className="text-xs text-muted-foreground">
@@ -41,7 +41,7 @@ export const AIStatus = ({
       </div>
       
       {isProcessing && (
-        <Badge variant="outline" className="text-xs animate-pulse border-jarvis-red/50 text-jarvis-red">
+        <Badge variant="outline" className="text-xs animate-pulse border-calc-primary/50 text-calc-primary">
           Processing...
         </Badge>
       )}

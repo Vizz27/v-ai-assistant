@@ -68,21 +68,14 @@ export const useAIChat = () => {
   }, [processCalculation]);
 
   const simulateAIResponse = useCallback((userMessage: string): string => {
-    // First try to process as a command
+    // Process calculation commands
     const commandResponse = processCommand(userMessage);
     if (commandResponse) {
       return commandResponse;
     }
     
-    // General AI chatbot responses
-    const responses = [
-      "I'm JARVIS, your personal AI assistant. I can help with calculations, web searches, and general questions. What would you like to know?",
-      "That's an interesting question! I'm here to assist you with three main capabilities: advanced calculations, web searching, and general conversation. How can I help?",
-      "As your AI assistant, I'm equipped to handle mathematical calculations, search queries, and provide information on various topics. What can I do for you?",
-      "I'm ready to help! Whether you need calculations solved, web searches performed, or just want to chat, I'm here for you. What's on your mind?"
-    ];
-    
-    return responses[Math.floor(Math.random() * responses.length)];
+    // Default response for non-calculation queries
+    return "I'm SuperCalculator, your advanced mathematical assistant. Please provide me with calculations to solve. I can handle basic arithmetic, scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), and expressions with pi and e.";
   }, [processCommand]);
 
   const sendMessage = useCallback(async (message: string) => {

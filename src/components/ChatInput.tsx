@@ -40,11 +40,11 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask me anything or give me a command..."
+          placeholder="Enter your calculation (e.g., 2^8 + sqrt(144), sin(90), log(100))..."
           className={cn(
             "min-h-[60px] max-h-[200px] pr-24 resize-none",
             "border-border/50 bg-card/50 backdrop-blur-sm",
-            "focus:ring-jarvis-gold focus:border-jarvis-gold",
+            "focus:ring-calc-primary focus:border-calc-primary",
             "transition-all duration-300"
           )}
           disabled={isLoading}
@@ -60,7 +60,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
               "h-8 w-8 p-0 transition-all duration-300",
               isListening 
                 ? "text-destructive hover:text-destructive/80" 
-                : "text-muted-foreground hover:text-jarvis-gold"
+                : "text-muted-foreground hover:text-calc-primary"
             )}
           >
             {isListening ? (
@@ -75,7 +75,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
             size="sm"
             disabled={!message.trim() || isLoading}
             className={cn(
-              "h-8 w-8 p-0 bg-gradient-jarvis hover:shadow-glow-primary",
+              "h-8 w-8 p-0 bg-gradient-calc hover:shadow-glow-calc",
               "transition-all duration-300 disabled:opacity-50"
             )}
           >

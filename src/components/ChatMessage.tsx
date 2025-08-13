@@ -18,13 +18,13 @@ export const ChatMessage = ({ message, isUser, timestamp }: ChatMessageProps) =>
     )}>
       <Avatar className={cn(
         "h-8 w-8 shrink-0",
-        !isUser && "shadow-glow-primary"
+        !isUser && "shadow-glow-calc"
       )}>
         <AvatarFallback className={cn(
           "text-sm font-medium",
           isUser 
             ? "bg-secondary text-secondary-foreground" 
-            : "bg-gradient-jarvis text-primary-foreground shadow-glow-primary"
+            : "bg-gradient-calc text-primary-foreground shadow-glow-calc"
         )}>
           {isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
         </AvatarFallback>
@@ -35,7 +35,7 @@ export const ChatMessage = ({ message, isUser, timestamp }: ChatMessageProps) =>
         isUser && "text-right"
       )}>
         <div className="text-sm text-muted-foreground">
-          {isUser ? "You" : "JARVIS"}
+          {isUser ? "You" : "SuperCalculator"}
           {timestamp && (
             <span className="ml-2 text-xs opacity-60">
               {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

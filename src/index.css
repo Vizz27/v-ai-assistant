@@ -8,54 +8,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* JARVIS Iron Man Theme - Dark with Red & Gold */
-    --background: 0 0% 5%;
-    --foreground: 40 100% 95%;
+    /* SuperCalculator Blue Theme */
+    --background: 220 40% 5%;
+    --foreground: 210 100% 95%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 40 100% 95%;
+    --card: 220 30% 8%;
+    --card-foreground: 210 100% 95%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 40 100% 95%;
+    --popover: 220 30% 8%;
+    --popover-foreground: 210 100% 95%;
 
-    /* Iron Man Primary - Arc Reactor Gold */
-    --primary: 45 100% 60%;
-    --primary-foreground: 0 0% 5%;
+    /* Calculator Primary - Light Blue */
+    --primary: 210 100% 50%;
+    --primary-foreground: 220 40% 5%;
 
-    /* Iron Man Secondary - Dark Red */
-    --secondary: 0 40% 12%;
-    --secondary-foreground: 40 100% 95%;
+    /* Calculator Secondary - Dark Blue */
+    --secondary: 220 40% 12%;
+    --secondary-foreground: 210 100% 95%;
 
-    --muted: 0 20% 10%;
-    --muted-foreground: 40 20% 65%;
+    --muted: 220 20% 10%;
+    --muted-foreground: 210 20% 65%;
 
-    /* Iron Man Accent - Bright Red */
-    --accent: 0 85% 55%;
-    --accent-foreground: 40 100% 95%;
+    /* Calculator Accent - Bright Blue */
+    --accent: 200 100% 60%;
+    --accent-foreground: 220 40% 5%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 40 100% 95%;
+    --destructive-foreground: 210 100% 95%;
 
-    --border: 0 40% 15%;
-    --input: 0 20% 10%;
-    --ring: 45 100% 60%;
+    --border: 220 40% 15%;
+    --input: 220 20% 10%;
+    --ring: 210 100% 50%;
 
-    /* JARVIS Specific Colors */
-    --jarvis-gold: 45 100% 60%;
-    --jarvis-red: 0 85% 55%;
-    --jarvis-dark-red: 0 40% 12%;
-    --chat-user: 0 40% 15%;
-    --chat-assistant: 0 20% 10%;
+    /* Calculator Specific Colors */
+    --calc-primary: 210 100% 50%;
+    --calc-secondary: 220 100% 30%;
+    --calc-glow: 200 100% 70%;
+    --calc-light-blue: 200 100% 80%;
+    --calc-dark-blue: 220 100% 20%;
+    --chat-user: 220 40% 15%;
+    --chat-assistant: 220 20% 10%;
     
-    /* Iron Man Gradients */
-    --gradient-jarvis: linear-gradient(135deg, hsl(45 100% 60%), hsl(0 85% 55%));
-    --gradient-glow: linear-gradient(135deg, hsl(45 100% 60% / 0.3), hsl(0 85% 55% / 0.2));
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 5%));
+    /* Calculator Gradients */
+    --gradient-calc: linear-gradient(135deg, hsl(210 100% 50%), hsl(220 100% 30%));
+    --gradient-calc-subtle: linear-gradient(180deg, hsl(220 30% 8%), hsl(220 40% 5%));
+    --gradient-subtle: linear-gradient(180deg, hsl(220 30% 8%), hsl(220 40% 5%));
 
-    /* JARVIS Effects */
-    --glow-primary: 0 0 25px hsl(45 100% 60% / 0.4), 0 0 50px hsl(45 100% 60% / 0.2);
-    --glow-accent: 0 0 20px hsl(0 85% 55% / 0.3), 0 0 40px hsl(0 85% 55% / 0.1);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Calculator Effects */
+    --shadow-calc: 0 0 25px hsl(210 100% 50% / 0.4), 0 0 50px hsl(210 100% 50% / 0.2);
+    --shadow-glow-calc: 0 0 20px hsl(200 100% 70% / 0.3), 0 0 40px hsl(200 100% 70% / 0.1);
+    --transition-calc: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.75rem;
 

@@ -52,12 +52,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// JARVIS Iron Man specific colors
-				'jarvis-gold': 'hsl(var(--jarvis-gold))',
-				'jarvis-red': 'hsl(var(--jarvis-red))',
-				'jarvis-dark-red': 'hsl(var(--jarvis-dark-red))',
-				'chat-user': 'hsl(var(--chat-user))',
-				'chat-assistant': 'hsl(var(--chat-assistant))',
+				// SuperCalculator Blue theme colors
+				'calc-primary': 'hsl(var(--calc-primary))',
+				'calc-secondary': 'hsl(var(--calc-secondary))',
+				'calc-glow': 'hsl(var(--calc-glow))',
+				'calc-light-blue': 'hsl(var(--calc-light-blue))',
+				'calc-dark-blue': 'hsl(var(--calc-dark-blue))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -75,16 +75,16 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			backgroundImage: {
-				'gradient-jarvis': 'var(--gradient-jarvis)',
-				'gradient-glow': 'var(--gradient-glow)',
+				'gradient-calc': 'var(--gradient-calc)',
+				'gradient-calc-subtle': 'var(--gradient-calc-subtle)',
 				'gradient-subtle': 'var(--gradient-subtle)',
 			},
 			boxShadow: {
-				'glow-primary': 'var(--glow-primary)',
-				'glow-accent': 'var(--glow-accent)',
+				'shadow-calc': 'var(--shadow-calc)',
+				'shadow-glow-calc': 'var(--shadow-glow-calc)',
 			},
 			transitionTimingFunction: {
-				'smooth': 'var(--transition-smooth)',
+				'calc': 'var(--transition-calc)',
 			},
 			keyframes: {
 				'accordion-down': {
