@@ -41,14 +41,25 @@ export const useAIChat = () => {
 
   const processSearch = useCallback(async (query: string): Promise<string> => {
     try {
-      // This would use the websearch tool in a real implementation
-      return `Searching for "${query}"... Search functionality will be implemented with web API.`;
+      const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`;
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      const abstractText = data.AbstractText || data.Definition || "No summary found.";
+      const relatedTopics = data.RelatedTopics?.slice(0, 3).map((topic: any) => topic.Text).join('\n• ') || "";
+      
+      let result = `Search results for "${query}":\n\n${abstractText}`;
+      if (relatedTopics) {
+        result += `\n\nRelated topics:\n• ${relatedTopics}`;
+      }
+      
+      return result;
     } catch (error) {
-      return "Search is currently unavailable. Please try again later.";
+      return `Search for "${query}" failed. This might be due to CORS restrictions. Please try a different search term.`;
     }
   }, []);
 
-  const processCommand = useCallback((message: string): string => {
+  const processCommand = useCallback(async (message: string): Promise<string | null> => {
     const lowerMessage = message.toLowerCase();
     
     // Calculator commands
@@ -60,22 +71,22 @@ export const useAIChat = () => {
     // Search commands  
     if (lowerMessage.includes("search")) {
       const searchQuery = message.replace(/search\s+(for\s+)?/gi, '').trim();
-      return `I'll search for "${searchQuery}" for you. Web search functionality coming soon!`;
+      return await processSearch(searchQuery);
     }
     
     // Default responses for unrecognized commands
     return null;
-  }, [processCalculation]);
+  }, [processCalculation, processSearch]);
 
-  const simulateAIResponse = useCallback((userMessage: string): string => {
+  const simulateAIResponse = useCallback(async (userMessage: string): Promise<string> => {
     // Process calculation commands
-    const commandResponse = processCommand(userMessage);
+    const commandResponse = await processCommand(userMessage);
     if (commandResponse) {
       return commandResponse;
     }
     
-    // Default response for non-calculation queries
-    return "I'm SuperCalculator, your advanced mathematical assistant. Please provide me with calculations to solve. I can handle basic arithmetic, scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), and expressions with pi and e.";
+    // Default response for non-calculation/search queries
+    return "I'm ZooZo, your advanced assistant. I can handle calculations (including scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), pi, e) and search queries. Try asking me to calculate something or search for information!";
   }, [processCommand]);
 
   const sendMessage = useCallback(async (message: string) => {
@@ -93,10 +104,12 @@ export const useAIChat = () => {
     setIsLoading(true);
     
     try {
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+      // Simulate processing delay for calculations only, search is real-time
+      if (!message.toLowerCase().includes("search")) {
+        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+      }
       
-      const aiResponse = simulateAIResponse(message);
+      const aiResponse = await simulateAIResponse(message);
       
       const assistantMessage: ChatMessage = {
         id: `ai-${Date.now()}`,
