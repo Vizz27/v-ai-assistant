@@ -15,40 +15,25 @@ interface CommandSuggestionsProps {
 
 const suggestions = [
   {
-    icon: Clock,
-    text: "What time is it?",
-    command: "What time is it?",
-    description: "Check current time"
-  },
-  {
-    icon: Cloud,
-    text: "Check the weather",
-    command: "What's the weather like today?",
-    description: "Get weather info"
+    icon: Calculator,
+    text: "Calculator",
+    command: "Calculate 2^8 + sqrt(144)",
+    description: "Scientific Calculator",
+    category: "calculator"
   },
   {
     icon: Search,
-    text: "Search the web",
-    command: "Search for information about",
-    description: "Web search"
-  },
-  {
-    icon: Calculator,
-    text: "Do calculations",
-    command: "Calculate 15% tip on $45",
-    description: "Math & calculations"
-  },
-  {
-    icon: FileText,
-    text: "Summarize text",
-    command: "Summarize this document for me",
-    description: "Text analysis"
+    text: "Search Engine",
+    command: "Search for latest AI news",
+    description: "Web Search",
+    category: "search"
   },
   {
     icon: Lightbulb,
-    text: "Get ideas",
-    command: "Give me creative ideas for",
-    description: "Creative assistance"
+    text: "General Chat",
+    command: "Tell me about quantum computing",
+    description: "AI Assistant",
+    category: "chat"
   }
 ];
 
@@ -59,7 +44,7 @@ export const CommandSuggestions = ({ onSelectCommand }: CommandSuggestionsProps)
         Available Commands:
       </h3>
       
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-4">
         {suggestions.map((suggestion, index) => {
           const Icon = suggestion.icon;
           return (
@@ -68,11 +53,14 @@ export const CommandSuggestions = ({ onSelectCommand }: CommandSuggestionsProps)
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="h-16 w-16 p-0 rounded-xl hover:bg-jarvis-dark-red/30 hover:border-jarvis-gold/30 border border-transparent transition-all duration-300 group relative overflow-hidden"
+                  className="h-20 w-full p-4 rounded-xl hover:bg-jarvis-dark-red/30 hover:border-jarvis-gold/30 border border-transparent transition-all duration-300 group relative overflow-hidden flex flex-col items-center gap-2"
                   onClick={() => onSelectCommand(suggestion.command)}
                 >
                   <div className="absolute inset-0 bg-gradient-jarvis opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                  <Icon className="h-6 w-6 text-jarvis-gold group-hover:text-jarvis-red group-hover:scale-110 transition-all duration-300" />
+                  <Icon className="h-8 w-8 text-jarvis-gold group-hover:text-jarvis-red group-hover:scale-110 transition-all duration-300" />
+                  <span className="text-xs font-medium text-jarvis-gold group-hover:text-jarvis-red transition-colors duration-300">
+                    {suggestion.text}
+                  </span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent 

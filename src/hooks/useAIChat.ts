@@ -12,74 +12,60 @@ export const useAIChat = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const processCalculation = useCallback((expression: string): string => {
+    try {
+      // Enhanced calculation with scientific functions
+      let processedExpression = expression
+        .replace(/\^/g, '**')
+        .replace(/sqrt\(([^)]+)\)/g, 'Math.sqrt($1)')
+        .replace(/sin\(([^)]+)\)/g, 'Math.sin($1)')
+        .replace(/cos\(([^)]+)\)/g, 'Math.cos($1)')
+        .replace(/tan\(([^)]+)\)/g, 'Math.tan($1)')
+        .replace(/log\(([^)]+)\)/g, 'Math.log10($1)')
+        .replace(/ln\(([^)]+)\)/g, 'Math.log($1)')
+        .replace(/pi/g, 'Math.PI')
+        .replace(/e/g, 'Math.E');
+
+      // Safe evaluation
+      const result = Function('"use strict"; return (' + processedExpression + ')')();
+      
+      if (isNaN(result) || !isFinite(result)) {
+        throw new Error("Invalid calculation");
+      }
+      
+      return `${expression} = ${result}`;
+    } catch (error) {
+      return "Invalid calculation. Try examples like: 2+3, sqrt(16), sin(90), 2^3, log(100)";
+    }
+  }, []);
+
+  const processSearch = useCallback(async (query: string): Promise<string> => {
+    try {
+      // This would use the websearch tool in a real implementation
+      return `Searching for "${query}"... Search functionality will be implemented with web API.`;
+    } catch (error) {
+      return "Search is currently unavailable. Please try again later.";
+    }
+  }, []);
+
   const processCommand = useCallback((message: string): string => {
     const lowerMessage = message.toLowerCase();
     
-    // Time commands
-    if (lowerMessage.includes("time")) {
-      return `The current time is ${new Date().toLocaleTimeString()}.`;
-    }
-    
-    // Date commands
-    if (lowerMessage.includes("date") || lowerMessage.includes("today")) {
-      return `Today is ${new Date().toLocaleDateString("en-US", { 
-        weekday: "long", 
-        year: "numeric", 
-        month: "long", 
-        day: "numeric" 
-      })}.`;
-    }
-    
     // Calculator commands
-    if (lowerMessage.includes("calculate") || lowerMessage.includes("math")) {
-      try {
-        // Simple calculation extraction (very basic)
-        const mathMatch = message.match(/(\d+(?:\.\d+)?)\s*([+\-*/])\s*(\d+(?:\.\d+)?)/);
-        if (mathMatch) {
-          const [, num1, operator, num2] = mathMatch;
-          const a = parseFloat(num1);
-          const b = parseFloat(num2);
-          let result;
-          
-          switch (operator) {
-            case '+': result = a + b; break;
-            case '-': result = a - b; break;
-            case '*': result = a * b; break;
-            case '/': result = a / b; break;
-            default: throw new Error("Invalid operator");
-          }
-          
-          return `${a} ${operator} ${b} = ${result}`;
-        }
-        
-        // Tip calculation
-        if (lowerMessage.includes("tip")) {
-          const tipMatch = message.match(/(\d+)%.*\$(\d+(?:\.\d+)?)/);
-          if (tipMatch) {
-            const [, percentage, amount] = tipMatch;
-            const tip = (parseFloat(amount) * parseInt(percentage)) / 100;
-            const total = parseFloat(amount) + tip;
-            return `${percentage}% tip on $${amount} is $${tip.toFixed(2)}. Total: $${total.toFixed(2)}`;
-          }
-        }
-      } catch (error) {
-        return "I couldn't perform that calculation. Please try a simpler format like '2 + 2' or '15% tip on $45'.";
-      }
+    if (lowerMessage.includes("calculate") || lowerMessage.includes("math") || 
+        /[\d+\-*/^()sqrt sin cos tan log ln pi e]/.test(message)) {
+      return processCalculation(message.replace(/calculate|math/gi, '').trim());
     }
     
-    // Weather (mock response)
-    if (lowerMessage.includes("weather")) {
-      return "I don't have access to real-time weather data yet. Please connect an API key to enable weather features.";
-    }
-    
-    // Search commands
+    // Search commands  
     if (lowerMessage.includes("search")) {
-      return "I can help you search! However, I need an API key to access real-time search results. For now, I can answer general questions based on my knowledge.";
+      const searchQuery = message.replace(/search\s+(for\s+)?/gi, '').trim();
+      return `I'll search for "${searchQuery}" for you. Web search functionality coming soon!`;
     }
     
     // Default responses for unrecognized commands
     return null;
-  }, []);
+  }, [processCalculation]);
 
   const simulateAIResponse = useCallback((userMessage: string): string => {
     // First try to process as a command
@@ -88,12 +74,12 @@ export const useAIChat = () => {
       return commandResponse;
     }
     
-    // General AI responses
+    // General AI chatbot responses
     const responses = [
-      "I understand you're asking about that. As an AI assistant, I'm here to help with various tasks. Currently, I can handle basic commands like time, date, and simple calculations. For more advanced features, you'll need to configure API keys.",
-      "That's an interesting question! I'm designed to be your personal AI assistant. I can help with scheduling, calculations, and general questions. What specific task would you like me to help you with?",
-      "I'm processing your request. As a local AI assistant, I can perform various tasks. Right now I'm working with basic functionality, but I can be enhanced with additional capabilities through API integrations.",
-      "Thanks for that input! I'm your on-device AI assistant, ready to help with daily tasks. I can handle time queries, basic math, and general assistance. How else can I help you today?"
+      "I'm JARVIS, your personal AI assistant. I can help with calculations, web searches, and general questions. What would you like to know?",
+      "That's an interesting question! I'm here to assist you with three main capabilities: advanced calculations, web searching, and general conversation. How can I help?",
+      "As your AI assistant, I'm equipped to handle mathematical calculations, search queries, and provide information on various topics. What can I do for you?",
+      "I'm ready to help! Whether you need calculations solved, web searches performed, or just want to chat, I'm here for you. What's on your mind?"
     ];
     
     return responses[Math.floor(Math.random() * responses.length)];
