@@ -75,10 +75,7 @@ const Index = () => {
                       <Brain className="h-8 w-8 text-primary-foreground rounded-full" />
                     </div>
                     <h2 className="text-2xl font-semibold">Hello! I'm ZooZo</h2>
-                    <p className="text-muted-foreground">
-                      Your advanced AI assistant. I can solve complex calculations, scientific functions, 
-                      and search the web for information. Try asking me to calculate something or search for any topic!
-                    </p>
+                    <p className="text-muted-foreground">Your advanced AI assistant. I can solve complex calculations, scientific functions. Try asking me to calculate something!</p>
                   </div>
                 </div> : <ScrollArea ref={scrollAreaRef} className="h-full p-4">
                   <div className="space-y-4">
