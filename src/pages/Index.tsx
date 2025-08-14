@@ -9,9 +9,13 @@ import { AIStatus } from "@/components/AIStatus";
 import { useAIChat } from "@/hooks/useAIChat";
 import { Brain, Trash2, Settings } from "lucide-react";
 import { toast } from "sonner";
-
 const Index = () => {
-  const { messages, isLoading, sendMessage, clearMessages } = useAIChat();
+  const {
+    messages,
+    isLoading,
+    sendMessage,
+    clearMessages
+  } = useAIChat();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -23,22 +27,17 @@ const Index = () => {
       }
     }
   }, [messages]);
-
   const handleClearChat = () => {
     clearMessages();
     toast.success("Chat history cleared");
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-subtle text-foreground">
+  return <div className="min-h-screen bg-gradient-subtle text-foreground">
       {/* Header */}
       <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-gradient-calc flex items-center justify-center shadow-glow-calc">
-                <Brain className="h-6 w-6 text-primary-foreground" />
-              </div>
+              
               <div>
                 <h1 className="text-xl font-semibold">ZooZo</h1>
                 <p className="text-sm text-muted-foreground">Advanced AI Assistant for Calculations & Search</p>
@@ -46,20 +45,11 @@ const Index = () => {
             </div>
             
             <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleClearChat}
-                disabled={messages.length === 0}
-                className="hover:bg-secondary/50"
-              >
+              <Button variant="ghost" size="sm" onClick={handleClearChat} disabled={messages.length === 0} className="hover:bg-secondary/50">
                 <Trash2 className="h-4 w-4 mr-2" />
                 Clear
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-secondary/50">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
+              
             </div>
           </div>
         </div>
@@ -71,21 +61,18 @@ const Index = () => {
           <div className="lg:col-span-1 space-y-4">
             <AIStatus isProcessing={isLoading} />
             
-            {messages.length === 0 && (
-              <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
+            {messages.length === 0 && <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
                 <CommandSuggestions onSelectCommand={sendMessage} />
-              </Card>
-            )}
+              </Card>}
           </div>
 
           {/* Main Chat Area */}
           <div className="lg:col-span-3 flex flex-col">
             <Card className="flex-1 bg-card/30 backdrop-blur-sm border-border/50 overflow-hidden">
-              {messages.length === 0 ? (
-                <div className="h-full flex items-center justify-center p-8">
+              {messages.length === 0 ? <div className="h-full flex items-center justify-center p-8">
                   <div className="text-center space-y-4 max-w-md">
                     <div className="h-16 w-16 mx-auto rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">
-                      <Brain className="h-8 w-8 text-primary-foreground" />
+                      <Brain className="h-8 w-8 text-primary-foreground rounded-full" />
                     </div>
                     <h2 className="text-2xl font-semibold">Hello! I'm ZooZo</h2>
                     <p className="text-muted-foreground">
@@ -93,21 +80,11 @@ const Index = () => {
                       and search the web for information. Try asking me to calculate something or search for any topic!
                     </p>
                   </div>
-                </div>
-              ) : (
-                <ScrollArea ref={scrollAreaRef} className="h-full p-4">
+                </div> : <ScrollArea ref={scrollAreaRef} className="h-full p-4">
                   <div className="space-y-4">
-                    {messages.map((message) => (
-                      <ChatMessage
-                        key={message.id}
-                        message={message.message}
-                        isUser={message.isUser}
-                        timestamp={message.timestamp}
-                      />
-                    ))}
+                    {messages.map(message => <ChatMessage key={message.id} message={message.message} isUser={message.isUser} timestamp={message.timestamp} />)}
                     
-                    {isLoading && (
-                      <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
+                    {isLoading && <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
                         <div className="h-8 w-8 rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">
                           <Brain className="h-4 w-4 text-primary-foreground" />
                         </div>
@@ -119,11 +96,9 @@ const Index = () => {
                             <div className="h-2 w-2 bg-calc-primary rounded-full animate-pulse delay-150"></div>
                           </div>
                         </div>
-                      </div>
-                    )}
+                      </div>}
                   </div>
-                </ScrollArea>
-              )}
+                </ScrollArea>}
             </Card>
             
             <div className="mt-4">
@@ -132,8 +107,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
