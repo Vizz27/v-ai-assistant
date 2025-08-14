@@ -39,25 +39,6 @@ export const useAIChat = () => {
     }
   }, []);
 
-  const processSearch = useCallback(async (query: string): Promise<string> => {
-    try {
-      const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`;
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      const abstractText = data.AbstractText || data.Definition || "No summary found.";
-      const relatedTopics = data.RelatedTopics?.slice(0, 3).map((topic: any) => topic.Text).join('\n• ') || "";
-      
-      let result = `Search results for "${query}":\n\n${abstractText}`;
-      if (relatedTopics) {
-        result += `\n\nRelated topics:\n• ${relatedTopics}`;
-      }
-      
-      return result;
-    } catch (error) {
-      return `Search for "${query}" failed. This might be due to CORS restrictions. Please try a different search term.`;
-    }
-  }, []);
 
   const processCommand = useCallback(async (message: string): Promise<string | null> => {
     const lowerMessage = message.toLowerCase();
@@ -68,15 +49,9 @@ export const useAIChat = () => {
       return processCalculation(message.replace(/calculate|math/gi, '').trim());
     }
     
-    // Search commands  
-    if (lowerMessage.includes("search")) {
-      const searchQuery = message.replace(/search\s+(for\s+)?/gi, '').trim();
-      return await processSearch(searchQuery);
-    }
-    
     // Default responses for unrecognized commands
     return null;
-  }, [processCalculation, processSearch]);
+  }, [processCalculation]);
 
   const simulateAIResponse = useCallback(async (userMessage: string): Promise<string> => {
     // Process calculation commands
@@ -85,8 +60,8 @@ export const useAIChat = () => {
       return commandResponse;
     }
     
-    // Default response for non-calculation/search queries
-    return "I'm ZooZo, your advanced assistant. I can handle calculations (including scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), pi, e) and search queries. Try asking me to calculate something or search for information!";
+    // Default response for non-calculation queries
+    return "I'm ZooZo, your advanced calculator. I can handle calculations including scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), pi, e. Try asking me to calculate something like '2^8 + sqrt(144)' or 'sin(90)'!";
   }, [processCommand]);
 
   const sendMessage = useCallback(async (message: string) => {
@@ -104,10 +79,8 @@ export const useAIChat = () => {
     setIsLoading(true);
     
     try {
-      // Simulate processing delay for calculations only, search is real-time
-      if (!message.toLowerCase().includes("search")) {
-        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-      }
+      // Simulate processing delay for calculations
+      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
       
       const aiResponse = await simulateAIResponse(message);
       

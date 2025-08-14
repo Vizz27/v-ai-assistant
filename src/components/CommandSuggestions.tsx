@@ -20,13 +20,6 @@ const suggestions = [
     command: "Calculate 2^8 + sqrt(144)",
     description: "Advanced Calculator",
     category: "calculator"
-  },
-  {
-    icon: Search,
-    text: "Search",
-    command: "Search for artificial intelligence",
-    description: "Web Search",
-    category: "search"
   }
 ];
 
