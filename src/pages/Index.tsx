@@ -39,7 +39,7 @@ const Index = () => {
             <div className="flex items-center gap-3">
               
               <div>
-                <h1 className="text-xl font-semibold">ZooZo</h1>
+                <h1 className="text-xl font-semibold">V</h1>
                 <p className="text-sm text-muted-foreground">Advanced AI Assistant for Calculations & Search</p>
               </div>
             </div>
@@ -74,7 +74,7 @@ const Index = () => {
                     <div className="h-16 w-16 mx-auto rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">
                       <Brain className="h-8 w-8 text-primary-foreground rounded-full" />
                     </div>
-                    <h2 className="text-2xl font-semibold">Hello! I'm ZooZo</h2>
+                    <h2 className="text-2xl font-semibold">Hello! I'm V</h2>
                     <p className="text-muted-foreground">Your advanced AI assistant. I can solve complex calculations, scientific functions. Try asking me to calculate something!</p>
                   </div>
                 </div> : <ScrollArea ref={scrollAreaRef} className="h-full p-4">
@@ -86,7 +86,7 @@ const Index = () => {
                           <Brain className="h-4 w-4 text-primary-foreground" />
                         </div>
                         <div className="flex-1">
-                          <div className="text-sm text-muted-foreground mb-2">ZooZo</div>
+                          <div className="text-sm text-muted-foreground mb-2">V</div>
                           <div className="flex gap-1">
                             <div className="h-2 w-2 bg-calc-primary rounded-full animate-pulse"></div>
                             <div className="h-2 w-2 bg-calc-glow rounded-full animate-pulse delay-75"></div>

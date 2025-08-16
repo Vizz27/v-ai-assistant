@@ -40,18 +40,18 @@ All colors MUST be HSL.
     --input: 220 20% 10%;
     --ring: 210 100% 50%;
 
-    /* Calculator Specific Colors */
+    /* V Blue-Pink theme colors */
     --calc-primary: 210 100% 50%;
-    --calc-secondary: 220 100% 30%;
-    --calc-glow: 200 100% 70%;
+    --calc-secondary: 330 80% 50%;
+    --calc-glow: 300 70% 60%;
     --calc-light-blue: 200 100% 80%;
     --calc-dark-blue: 220 100% 20%;
     --chat-user: 220 40% 15%;
     --chat-assistant: 220 20% 10%;
     
     /* Calculator Gradients */
-    --gradient-calc: linear-gradient(135deg, hsl(210 100% 50%), hsl(220 100% 30%));
-    --gradient-calc-subtle: linear-gradient(180deg, hsl(220 30% 8%), hsl(220 40% 5%));
+    --gradient-calc: linear-gradient(135deg, hsl(210 100% 50%), hsl(330 80% 50%));
+    --gradient-calc-subtle: linear-gradient(180deg, hsl(210 100% 50% / 0.1), hsl(330 80% 50% / 0.1));
     --gradient-subtle: linear-gradient(180deg, hsl(220 30% 8%), hsl(220 40% 5%));
 
     /* Calculator Effects */
