@@ -95,14 +95,17 @@ export const useAIChat = () => {
       
       const aiResponse = await simulateAIResponse(message);
       
-      const assistantMessage: ChatMessage = {
-        id: `ai-${Date.now()}`,
-        message: aiResponse,
-        isUser: false,
-        timestamp: new Date(),
-      };
-      
-      setMessages(prev => [...prev, assistantMessage]);
+      // Don't add special command responses as chat messages
+      if (aiResponse !== "SHOW_TODO_LIST" && aiResponse !== "SHOW_VOICE_TO_TEXT") {
+        const assistantMessage: ChatMessage = {
+          id: `ai-${Date.now()}`,
+          message: aiResponse,
+          isUser: false,
+          timestamp: new Date(),
+        };
+        
+        setMessages(prev => [...prev, assistantMessage]);
+      }
     } catch (error) {
       toast.error("Failed to process your message. Please try again.");
       console.error("AI response error:", error);
@@ -120,5 +123,6 @@ export const useAIChat = () => {
     isLoading,
     sendMessage,
     clearMessages,
+    simulateAIResponse, // Export this so we can check for special commands
   };
 };

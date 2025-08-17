@@ -36,18 +36,26 @@ export const VoiceToText = ({ onClose }: VoiceToTextProps) => {
 
     recognitionRef.current.onresult = (event: any) => {
       let finalTranscript = '';
-      let interimTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
+        const transcriptText = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          finalTranscript += transcript;
-        } else {
-          interimTranscript += transcript;
+          finalTranscript += transcriptText;
         }
       }
 
-      setTranscript(prev => prev + finalTranscript + interimTranscript);
+      // Only update with final results to prevent duplicates
+      if (finalTranscript.trim()) {
+        setTranscript(prev => {
+          const trimmedPrev = prev.trim();
+          const trimmedNew = finalTranscript.trim();
+          // Prevent duplicate entries
+          if (trimmedPrev.endsWith(trimmedNew)) {
+            return prev;
+          }
+          return prev + finalTranscript + ' ';
+        });
+      }
     };
 
     recognitionRef.current.onerror = (event: any) => {
