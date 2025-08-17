@@ -43,20 +43,21 @@ export const useAIChat = () => {
   const processCommand = useCallback(async (message: string): Promise<string | null> => {
     const lowerMessage = message.toLowerCase();
     
-    // Calculator commands
-    if (lowerMessage.includes("calculate") || lowerMessage.includes("math") || 
-        /[\d+\-*/^()sqrt sin cos tan log ln pi e]/.test(message)) {
-      return processCalculation(message.replace(/calculate|math/gi, '').trim());
-    }
-    
-    // Todo list commands
+    // Todo list commands - Check first to avoid conflicts
     if (lowerMessage.includes("todo") || lowerMessage.includes("task") || lowerMessage.includes("show todo list")) {
       return "SHOW_TODO_LIST";
     }
     
-    // Voice to text commands
+    // Voice to text commands - Check second to avoid conflicts
     if (lowerMessage.includes("voice to text") || lowerMessage.includes("speech") || lowerMessage.includes("start voice to text")) {
       return "SHOW_VOICE_TO_TEXT";
+    }
+    
+    // Calculator commands - Check last, and be more specific
+    if (lowerMessage.includes("calculate") || lowerMessage.includes("math") || 
+        (lowerMessage.match(/[\d+\-*/^()sqrt sin cos tan log ln pi e]/) && 
+         !lowerMessage.includes("todo") && !lowerMessage.includes("voice"))) {
+      return processCalculation(message.replace(/calculate|math/gi, '').trim());
     }
     
     // Default responses for unrecognized commands

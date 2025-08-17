@@ -40,7 +40,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Enter your calculation (e.g., 2^8 + sqrt(144), sin(90), log(100))..."
+          placeholder="Ask me anything or use the commands above..."
           className={cn(
             "min-h-[60px] max-h-[200px] pr-24 resize-none",
             "border-border/50 bg-card/50 backdrop-blur-sm",
