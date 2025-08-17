@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
@@ -6,6 +6,8 @@ import { ChatMessage } from "@/components/ChatMessage";
 import { ChatInput } from "@/components/ChatInput";
 import { CommandSuggestions } from "@/components/CommandSuggestions";
 import { AIStatus } from "@/components/AIStatus";
+import { TodoList } from "@/components/TodoList";
+import { VoiceToText } from "@/components/VoiceToText";
 import { useAIChat } from "@/hooks/useAIChat";
 import { Brain, Trash2, Settings } from "lucide-react";
 import { toast } from "sonner";
@@ -17,6 +19,8 @@ const Index = () => {
     clearMessages
   } = useAIChat();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [showTodoList, setShowTodoList] = useState(false);
+  const [showVoiceToText, setShowVoiceToText] = useState(false);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -24,6 +28,18 @@ const Index = () => {
       const scrollArea = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
       if (scrollArea) {
         scrollArea.scrollTop = scrollArea.scrollHeight;
+      }
+    }
+  }, [messages]);
+
+  // Handle special command responses
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && !lastMessage.isUser) {
+      if (lastMessage.message === "SHOW_TODO_LIST") {
+        setShowTodoList(true);
+      } else if (lastMessage.message === "SHOW_VOICE_TO_TEXT") {
+        setShowVoiceToText(true);
       }
     }
   }, [messages]);
@@ -64,6 +80,18 @@ const Index = () => {
             {messages.length === 0 && <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
                 <CommandSuggestions onSelectCommand={sendMessage} />
               </Card>}
+              
+            {showTodoList && (
+              <div className="mt-4">
+                <TodoList onClose={() => setShowTodoList(false)} />
+              </div>
+            )}
+            
+            {showVoiceToText && (
+              <div className="mt-4">
+                <VoiceToText onClose={() => setShowVoiceToText(false)} />
+              </div>
+            )}
           </div>
 
           {/* Main Chat Area */}
@@ -79,7 +107,13 @@ const Index = () => {
                   </div>
                 </div> : <ScrollArea ref={scrollAreaRef} className="h-full p-4">
                   <div className="space-y-4">
-                    {messages.map(message => <ChatMessage key={message.id} message={message.message} isUser={message.isUser} timestamp={message.timestamp} />)}
+                    {messages.map(message => {
+                      // Skip special command responses in chat
+                      if (!message.isUser && (message.message === "SHOW_TODO_LIST" || message.message === "SHOW_VOICE_TO_TEXT")) {
+                        return null;
+                      }
+                      return <ChatMessage key={message.id} message={message.message} isUser={message.isUser} timestamp={message.timestamp} />;
+                    })}
                     
                     {isLoading && <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
                         <div className="h-8 w-8 rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">

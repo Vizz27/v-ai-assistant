@@ -49,6 +49,16 @@ export const useAIChat = () => {
       return processCalculation(message.replace(/calculate|math/gi, '').trim());
     }
     
+    // Todo list commands
+    if (lowerMessage.includes("todo") || lowerMessage.includes("task") || lowerMessage.includes("show todo list")) {
+      return "SHOW_TODO_LIST";
+    }
+    
+    // Voice to text commands
+    if (lowerMessage.includes("voice to text") || lowerMessage.includes("speech") || lowerMessage.includes("start voice to text")) {
+      return "SHOW_VOICE_TO_TEXT";
+    }
+    
     // Default responses for unrecognized commands
     return null;
   }, [processCalculation]);
@@ -61,7 +71,7 @@ export const useAIChat = () => {
     }
     
     // Default response for non-calculation queries
-    return "I'm ZooZo, your advanced calculator. I can handle calculations including scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), pi, e. Try asking me to calculate something like '2^8 + sqrt(144)' or 'sin(90)'!";
+    return "I'm V, your advanced AI assistant. I can handle calculations including scientific functions like sqrt(), sin(), cos(), tan(), log(), ln(), pi, e. I also have a todo list and voice-to-text features. Try asking me to calculate something like '2^8 + sqrt(144)', 'show todo list', or 'start voice to text'!";
   }, [processCommand]);
 
   const sendMessage = useCallback(async (message: string) => {

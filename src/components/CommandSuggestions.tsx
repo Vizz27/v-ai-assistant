@@ -4,25 +4,41 @@ import { Clock, Cloud, FileText, Calculator, Search, Lightbulb } from "lucide-re
 interface CommandSuggestionsProps {
   onSelectCommand: (command: string) => void;
 }
-const suggestions = [{
-  icon: Calculator,
-  text: "Calculator",
-  command: "Calculate 2^8 + sqrt(144)",
-  description: "Advanced Calculator",
-  category: "calculator"
-}];
+const suggestions = [
+  {
+    icon: Calculator,
+    text: "Calculator",
+    command: "Calculate 2^8 + sqrt(144)",
+    description: "Advanced Calculator",
+    category: "calculator"
+  },
+  {
+    icon: FileText,
+    text: "Todo List",
+    command: "Show todo list",
+    description: "Simple Task Manager",
+    category: "productivity"
+  },
+  {
+    icon: Search,
+    text: "Voice to Text",
+    command: "Start voice to text",
+    description: "Speech Recognition",
+    category: "tools"
+  }
+];
 export const CommandSuggestions = ({
   onSelectCommand
 }: CommandSuggestionsProps) => {
   return <div className="space-y-4">
-      <h3 className="text-sm font-medium text-muted-foreground mb-3">Available Command:</h3>
+      <h3 className="text-sm font-medium text-muted-foreground mb-3">Available Commands:</h3>
       
-      <div className="flex justify-center gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
         {suggestions.map((suggestion, index) => {
         const Icon = suggestion.icon;
         return <Tooltip key={index}>
               <TooltipTrigger asChild>
-                <Button variant="ghost" size="lg" className="h-20 w-32 p-4 rounded-xl hover:bg-calc-dark-blue/30 hover:border-calc-primary/30 border border-transparent transition-all duration-300 group relative overflow-hidden flex flex-col items-center gap-2" onClick={() => onSelectCommand(suggestion.command)}>
+                <Button variant="ghost" size="lg" className="h-20 w-full p-4 rounded-xl hover:bg-calc-dark-blue/30 hover:border-calc-primary/30 border border-transparent transition-all duration-300 group relative overflow-hidden flex flex-col items-center gap-2" onClick={() => onSelectCommand(suggestion.command)}>
                   <div className="absolute inset-0 bg-gradient-calc opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                   <Icon className="h-8 w-8 text-calc-primary group-hover:text-calc-glow group-hover:scale-110 transition-all duration-300" />
                   <span className="text-xs font-medium text-calc-primary group-hover:text-calc-glow transition-colors duration-300">
