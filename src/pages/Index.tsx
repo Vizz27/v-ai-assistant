@@ -37,11 +37,12 @@ const Index = () => {
   const handleSendMessage = async (message: string) => {
     // Check if it's a special command first
     const response = await simulateAIResponse(message);
+    
     if (response === "SHOW_VOICE_TO_TEXT") {
       setShowVoiceToText(true);
       return;
     }
-
+    
     // If not a special command, process normally
     setShowVoiceToText(false);
     sendMessage(message);
@@ -59,7 +60,7 @@ const Index = () => {
               
               <div>
                 <h1 className="text-xl font-semibold">V</h1>
-                <p className="text-sm text-muted-foreground">Advanced AI Assistant for Calculations, Voice to Text conversion and a To Do List</p>
+                <p className="text-sm text-muted-foreground">Advanced AI Assistant for Calculations & Search</p>
               </div>
             </div>
             
@@ -93,9 +94,12 @@ const Index = () => {
           {/* Main Chat Area */}
           <div className="lg:col-span-3 flex flex-col">
             <Card className="flex-1 bg-card/30 backdrop-blur-sm border-border/50 overflow-hidden">
-              {showVoiceToText ? <div className="h-full p-4">
+              {showVoiceToText ? (
+                <div className="h-full p-4">
                   <VoiceToText onClose={() => setShowVoiceToText(false)} />
-                </div> : messages.length === 0 ? <div className="h-full flex items-center justify-center p-8">
+                </div>
+              ) : messages.length === 0 ? (
+                <div className="h-full flex items-center justify-center p-8">
                   <div className="text-center space-y-4 max-w-md">
                     <div className="h-16 w-16 mx-auto rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">
                       <Brain className="h-8 w-8 text-primary-foreground rounded-full" />
@@ -103,11 +107,16 @@ const Index = () => {
                     <h2 className="text-2xl font-semibold">Hello! I'm V</h2>
                     <p className="text-muted-foreground">Your AI assistant with three powerful features. Choose what you'd like to do from the options on the left, or use the commands below.</p>
                   </div>
-                </div> : <ScrollArea ref={scrollAreaRef} className="h-full p-4">
+                </div>
+              ) : (
+                <ScrollArea ref={scrollAreaRef} className="h-full p-4">
                   <div className="space-y-4">
-                    {messages.map(message => <ChatMessage key={message.id} message={message.message} isUser={message.isUser} timestamp={message.timestamp} />)}
+                    {messages.map(message => (
+                      <ChatMessage key={message.id} message={message.message} isUser={message.isUser} timestamp={message.timestamp} />
+                    ))}
                     
-                    {isLoading && <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
+                    {isLoading && (
+                      <div className="flex gap-3 p-4 rounded-lg bg-chat-assistant mr-8">
                         <div className="h-8 w-8 rounded-full bg-gradient-calc flex items-center justify-center shadow-glow-calc">
                           <Brain className="h-4 w-4 text-primary-foreground" />
                         </div>
@@ -119,14 +128,18 @@ const Index = () => {
                             <div className="h-2 w-2 bg-calc-primary rounded-full animate-pulse delay-150"></div>
                           </div>
                         </div>
-                      </div>}
+                      </div>
+                    )}
                   </div>
-                </ScrollArea>}
+                </ScrollArea>
+              )}
             </Card>
             
-            {messages.length > 0 && <div className="mt-4">
+            {messages.length > 0 && (
+              <div className="mt-4">
                 <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-              </div>}
+              </div>
+            )}
           </div>
         </div>
       </div>
