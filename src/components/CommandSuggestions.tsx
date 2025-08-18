@@ -13,13 +13,6 @@ const suggestions = [
     category: "calculator"
   },
   {
-    icon: FileText,
-    text: "Todo List",
-    command: "Show todo list",
-    description: "Simple Task Manager",
-    category: "productivity"
-  },
-  {
     icon: Search,
     text: "Voice to Text",
     command: "Start voice to text",

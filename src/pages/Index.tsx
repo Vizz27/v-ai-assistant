@@ -135,9 +135,11 @@ const Index = () => {
               )}
             </Card>
             
-            <div className="mt-4">
-              <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-            </div>
+            {messages.length > 0 && (
+              <div className="mt-4">
+                <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+              </div>
+            )}
           </div>
         </div>
       </div>
