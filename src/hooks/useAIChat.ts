@@ -53,6 +53,11 @@ export const useAIChat = () => {
       return "SHOW_VOICE_TO_TEXT";
     }
     
+    // Calculator mode command - just enable calculator mode
+    if (lowerMessage === "calculator") {
+      return "I'm ready to help with calculations! Try expressions like: 2+3, sqrt(16), sin(90), 2^3, log(100), or any mathematical expression.";
+    }
+    
     // Calculator commands - Check last, and be more specific
     if (lowerMessage.includes("calculate") || lowerMessage.includes("math") || 
         (lowerMessage.match(/[\d+\-*/^()sqrt sin cos tan log ln pi e]/) && 

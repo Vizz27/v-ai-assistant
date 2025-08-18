@@ -38,18 +38,12 @@ const Index = () => {
     // Check if it's a special command first
     const response = await simulateAIResponse(message);
     
-    if (response === "SHOW_TODO_LIST") {
-      setShowTodoList(true);
-      setShowVoiceToText(false);
-      return;
-    } else if (response === "SHOW_VOICE_TO_TEXT") {
+    if (response === "SHOW_VOICE_TO_TEXT") {
       setShowVoiceToText(true);
-      setShowTodoList(false);
       return;
     }
     
     // If not a special command, process normally
-    setShowTodoList(false);
     setShowVoiceToText(false);
     sendMessage(message);
   };
@@ -90,16 +84,15 @@ const Index = () => {
             {messages.length === 0 && !showTodoList && !showVoiceToText && <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
                 <CommandSuggestions onSelectCommand={handleSendMessage} />
               </Card>}
+            
+            {/* Persistent Todo List */}
+            <TodoList />
           </div>
 
           {/* Main Chat Area */}
           <div className="lg:col-span-3 flex flex-col">
             <Card className="flex-1 bg-card/30 backdrop-blur-sm border-border/50 overflow-hidden">
-              {showTodoList ? (
-                <div className="h-full p-4">
-                  <TodoList onClose={() => setShowTodoList(false)} />
-                </div>
-              ) : showVoiceToText ? (
+              {showVoiceToText ? (
                 <div className="h-full p-4">
                   <VoiceToText onClose={() => setShowVoiceToText(false)} />
                 </div>

@@ -8,7 +8,7 @@ const suggestions = [
   {
     icon: Calculator,
     text: "Calculator",
-    command: "Calculate 2^8 + sqrt(144)",
+    command: "calculator",
     description: "Advanced Calculator",
     category: "calculator"
   },
