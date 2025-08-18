@@ -75,18 +75,20 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-6 max-w-4xl">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-120px)]">
+      <div className="container mx-auto px-4 py-6 max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-[calc(100vh-120px)]">
           {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-4">
+          <div className="lg:col-span-2 space-y-4 flex flex-col">
             <AIStatus isProcessing={isLoading} />
             
-            {messages.length === 0 && !showTodoList && !showVoiceToText && <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50">
+            {messages.length === 0 && !showTodoList && !showVoiceToText && <Card className="p-4 bg-card/50 backdrop-blur-sm border-border/50 flex-1">
                 <CommandSuggestions onSelectCommand={handleSendMessage} />
               </Card>}
             
             {/* Persistent Todo List */}
-            <TodoList />
+            <div className="flex-1">
+              <TodoList />
+            </div>
           </div>
 
           {/* Main Chat Area */}

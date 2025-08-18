@@ -48,8 +48,8 @@ export const TodoList = ({ onClose }: TodoListProps) => {
   };
 
   return (
-    <Card className="p-4 bg-card/95 backdrop-blur-sm border-calc-primary/20">
-      <div className="space-y-3">
+    <Card className="p-4 bg-card/95 backdrop-blur-sm border-calc-primary/20 h-full">
+      <div className="space-y-3 h-full flex flex-col">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-semibold text-calc-primary">Todo List</h3>
           {onClose && (
@@ -72,7 +72,7 @@ export const TodoList = ({ onClose }: TodoListProps) => {
           </Button>
         </div>
 
-        <div className="space-y-2 max-h-40 overflow-y-auto">
+        <div className="space-y-2 flex-1 overflow-y-auto">
           {todos.length === 0 ? (
             <p className="text-muted-foreground text-center py-4">
               No tasks yet. Add one above!
