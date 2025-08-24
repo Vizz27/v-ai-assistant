@@ -1,73 +1,83 @@
-# Welcome to your Lovable project
+V The AI Assistant
 
-## Project info
+V The AI Assistant is a collection of lightweight, web-based productivity tools built with Vite, React, TypeScript, Tailwind CSS, and shadcn-ui.
+It combines multiple utilities into a single modern web app, designed for speed, simplicity, and usability.
 
-**URL**: https://lovable.dev/projects/6e81240e-acd3-40d4-9b9e-ebd86f1bb2f9
+🚀 Tools Included
 
-## How can I edit this code?
+🧮 SuperCalculator – A fast, responsive calculator for quick computations
 
-There are several ways of editing your application.
+📝 To-Do List Maker – Minimal task organizer to create, edit, and manage your daily tasks
 
-**Use Lovable**
+🎤 Voice-to-Text Converter – Converts speech into text instantly, with copy/paste support
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6e81240e-acd3-40d4-9b9e-ebd86f1bb2f9) and start prompting.
+🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+Framework: React (Vite for bundling)
 
-**Use your preferred IDE**
+Language: TypeScript
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Styling: Tailwind CSS
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+UI Components: shadcn-ui
 
-Follow these steps:
+Build Tool: Vite
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+📚 Resources & References
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+While building Veed AI Assistant, I referred to:
 
-# Step 3: Install the necessary dependencies.
-npm i
+Vite Documentation
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+React Documentation
+
+Tailwind CSS
+
+shadcn-ui
+
+⚙️ Getting Started
+1. Clone the repository
+git clone <YOUR_REPO_URL>
+cd veed-ai-assistant
+
+2. Install dependencies
+npm install
+
+3. Run locally
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The app will be available at http://localhost:5173 (default Vite dev port).
 
-**Use GitHub Codespaces**
+🌍 Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The project can be deployed on:
 
-## What technologies are used for this project?
+Vercel
 
-This project is built with:
+Netlify
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+GitHub Pages
 
-## How can I deploy this project?
+or any static hosting provider
 
-Simply open [Lovable](https://lovable.dev/projects/6e81240e-acd3-40d4-9b9e-ebd86f1bb2f9) and click on Share -> Publish.
+Build for production:
 
-## Can I connect a custom domain to my Lovable project?
+npm run build
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Output will be inside the dist/ folder.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+📌 Roadmap
+
+Add history tracking for the calculator
+
+Add task prioritization & deadlines to To-Do List Maker
+
+Improve speech accuracy in Voice-to-Text Converter
+
+Merge tools into a unified dashboard UI
+
+📜 License
+
+This project is open-source and available under the MIT License.
