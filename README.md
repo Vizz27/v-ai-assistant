@@ -1,4 +1,5 @@
-# V The AI Assistant  
+# V The AI Assistant — A fast, multipurpose assistant combining calculator, task manager, and voice-to-text in one responsive web app.
+
 
 **V The Assistant** is a modern web-based productivity suite that combines multiple tools into a single application.  
 It is built with **Vite, React, TypeScript, Tailwind CSS, and shadcn-ui**, focusing on speed, clean UI, and responsive design.  
@@ -44,7 +45,15 @@ While building Veed AI Assistant, I referred to:
 
 ## ⚙️ Getting Started  
 
-### 1. Clone the repository  
-```bash
-git clone <YOUR_REPO_URL>
-cd veed-ai-assistant
+ 1. Clone the repo
+    git clone https://github.com/Vizz27/v-ai-assistant.git
+    cd v-ai-assistant
+
+ 2. Install dependencies
+    npm install
+
+ 3. Run locally
+    npm run dev
+
+ 4. Build for production
+    npm run build
